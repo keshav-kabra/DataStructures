@@ -17,8 +17,8 @@ void insert(int data);
 void BFS_traversal();
 void DFS_traversal_preorder();
 int hieght();
-//void DFS_traversal_inorder();
-//void DFS_traversal_postorder();
+void DFS_traversal_inorder();
+void DFS_traversal_postorder();
 bool search(int data);
 int maximum_number();
 int minimum_number();
@@ -161,6 +161,26 @@ void DFS_traversal_preorder()
     
     return ;
 }
+void DFS_traversal_inorder()
+{
+    cout<<"\n";
+    stack<BstNode*> s;
+    BstNode* tempRoot = Root;
+    // s.push(tempRoot);
+    while(true)
+    {
+        while(tempRoot!=NULL)
+        {
+            s.push(tempRoot);
+            tempRoot = tempRoot->left;
+        }
+        if(s.empty()) return;
+        tempRoot = s.top();s.pop();
+        cout<<tempRoot->data<<"\t";
+        tempRoot = tempRoot->right;
+    }
+    return;
+}
 int main()
 {
     //call functions here
@@ -178,6 +198,7 @@ int main()
     cout<<"Maximum value is "<<maximum_value<<"\tand minimum value is "<<minimum_value<<"\n";
     
     DFS_traversal_preorder();
+    DFS_traversal_inorder();
 
     return 0;
 }
