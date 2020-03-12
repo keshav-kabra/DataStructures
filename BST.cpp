@@ -181,6 +181,56 @@ void DFS_traversal_inorder()
     }
     return;
 }
+
+
+
+
+
+
+void DFS_traversal_postorder()
+{
+    stack<BstNode*> s;
+    BstNode* current = Root;
+    BstNode* previous = NULL;
+    s.push(Root);
+    while(!s.empty())
+    {
+        current = s.top();
+        if(previous == NULL || previous->right == current)
+        {
+            while(current->left!=NULL)
+            {
+                current = current->left;
+                s.push(current);
+            }
+            current = s.top();s.pop();
+            cout<<current->data<<"\t";
+            
+        }
+        else if(current->left == previous)
+        {
+            if(current->right!=NULL)
+            {
+                s.push(current->right); 
+            }
+        }
+        else if(current->right == previous)
+        {
+            cout<<current->data<<"\t";
+            s.pop();
+            
+        }
+        previous = current;
+    }
+    return;
+}
+
+
+
+
+
+
+
 int main()
 {
     //call functions here
@@ -199,6 +249,8 @@ int main()
     
     DFS_traversal_preorder();
     DFS_traversal_inorder();
+    cout<<"\n";
+    DFS_traversal_postorder();
 
     return 0;
 }
