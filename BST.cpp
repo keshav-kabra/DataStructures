@@ -22,6 +22,7 @@ void DFS_traversal_postorder();
 bool search(int data);
 int maximum_number();
 int minimum_number();
+bool IsBST();
 BstNode* GetNewNode(int data);
 
 BstNode* GetNewNode(int data)
@@ -181,12 +182,6 @@ void DFS_traversal_inorder()
     }
     return;
 }
-
-
-
-
-
-
 void DFS_traversal_postorder()
 {
     stack<BstNode*> s;
@@ -224,6 +219,39 @@ void DFS_traversal_postorder()
     }
     return;
 }
+bool IsBST()
+{
+    //1.  do inorder traversal  
+    int result[100],i=0;
+    stack<BstNode*> s;
+    
+    
+    BstNode* tempRoot = Root;
+    while(true)
+    {
+        while(tempRoot!=NULL)
+        {
+            s.push(tempRoot);
+            tempRoot = tempRoot->left;
+        }
+        if(s.empty()) break ;
+        tempRoot = s.top();s.pop();
+        // cout<<tempRoot->data<<"\t"; 
+        result[i++] = tempRoot->data;
+        tempRoot = tempRoot->right;
+        
+        
+    }
+    int size = sizeof(result)/sizeof(result[0]);
+    //2.store result in an array or stack
+    for(i=0;i<size;i++)
+    {
+        if(result[i]>result[i+1]) return true;
+        else false;
+    }
+    //3.if arr is sorted then it is a binary tree  else not 
+
+}
 
 
 
@@ -251,6 +279,8 @@ int main()
     DFS_traversal_inorder();
     cout<<"\n";
     DFS_traversal_postorder();
+    cout<<"\nfor bool function \n";
+    if(IsBST()== true) cout<<"\nthe tree is binary tree";
 
     return 0;
 }
