@@ -18,7 +18,8 @@ void BFS_traversal();
 void DFS_traversal_preorder();
 int hieght();
 void DFS_traversal_inorder();
-void DFS_traversal_postorder();
+ void DFS_traversal_postorder();
+void DFS_traversal_postorder_multipleStack();
 bool search(int data);
 int maximum_number();
 int minimum_number();
@@ -208,6 +209,12 @@ void DFS_traversal_postorder()
             {
                 s.push(current->right); 
             }
+            else 
+            {
+                cout<<current->data<<"\t";
+                s.pop();
+            }
+            
         }
         else if(current->right == previous)
         {
@@ -217,6 +224,29 @@ void DFS_traversal_postorder()
         }
         previous = current;
     }
+    return;
+}
+
+void DFS_traversal_postorder_multipleStack()
+{
+    cout<<"\n";
+    stack<BstNode*> s1;
+    stack<BstNode*> s2;
+    BstNode *tempRoot;
+    s1.push(Root);
+    while(!s1.empty())
+    {
+        tempRoot = s1.top();s1.pop();
+        s2.push(tempRoot);
+        if(tempRoot->left!=NULL) s1.push(tempRoot->left);
+        if(tempRoot->right!=NULL) s1.push(tempRoot->right);
+    }
+    while(!s2.empty())
+    {
+        tempRoot = s2.top();s2.pop();
+        cout<<tempRoot->data<<"\t";
+    }
+
     return;
 }
 bool IsBST()
@@ -250,14 +280,9 @@ bool IsBST()
         else false;
     }
     //3.if arr is sorted then it is a binary tree  else not 
+    
 
 }
-
-
-
-
-
-
 
 int main()
 {
@@ -281,6 +306,7 @@ int main()
     DFS_traversal_postorder();
     cout<<"\nfor bool function \n";
     if(IsBST()== true) cout<<"\nthe tree is binary tree";
+    DFS_traversal_postorder_multipleStack();
 
     return 0;
 }
