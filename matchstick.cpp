@@ -2,13 +2,18 @@
 using namespace std;
 int main()
 {
+    int play = 1;
+    while (play == 1)
+    {
+
+
     int n = 0, toss, left , computer , user;
     //1 user input 
-    cout<<"enter the no of matchsticks\n ";
+    cout<<" WEL-COME TO MATCHSTICKS GAME \nenter the no of matchsticks\n ";
     while(n<=10)
     {
         cin>>n;
-        if(n<=10) cout<<"ivvalid input please enter value greater than 10\n";
+        if(n<=10) cout<<"invalid input please enter value greater than 10\n";
 
     }
     left = n;
@@ -26,13 +31,23 @@ int main()
         toss = 2;
         cout<<"computer will play first\n";
     }
-     //both players should play while n > 0
+     //both players should play while more than one matchstick left
     if(toss == 1)
     {
-        while(left>1)
+        while(left  > 1)
         {
             cout<<"enter input\n";
-            cin>>user;
+             while(true)
+            {
+                cin>>user;
+                if(user == 1 || user == 2 || user == 3 || user == 4)
+                break;
+                else
+                cout<<"enter a valid number of sticks please\n";
+                 
+
+            }
+            
             left = left - user;
             cout<<" remaning sticks "<<left<<"\n";
             //comp will play
@@ -46,7 +61,7 @@ int main()
     }
     else
     {
-        while(left>1)
+        while(left > 1)
         {
             //comp will play
             if(left % 5 == 0) computer = 4;
@@ -56,13 +71,26 @@ int main()
             left = left - computer;
             cout<<"\ncomputer picks "<<computer<<" stikcs \nremaning sticks "<<left<<"\n";
             cout<<"enter input\n";
-            cin>>user;
+            while(true)
+            {
+                cin>>user;
+                if(user == 1 || user == 2 || user == 3 || user == 4)
+                break;
+                else
+                cout<<"enter a valid number of sticks please\n";
+                 
+
+            }
             left = left - user;
             cout<<" remaning sticks"<<left;
         }
 
     }
     if(left == 1) 
-    cout<<"computer wins";
+    cout<<"\ncomputer wins";
+    cout<<"\npress  1 for play again \n0 fro exit";
+    cin>>play;
+     
+    }
     return 0;
 }
