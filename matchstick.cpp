@@ -2,8 +2,8 @@
 using namespace std;
 int main()
 {
-    int play = 1;
-    while (play == 1)
+    char play = 'y';
+    while (play == 'y' || play == 'Y')
     {
 
 
@@ -34,7 +34,7 @@ int main()
      //both players should play while more than one matchstick left
     if(toss == 1)
     {
-        while(left  > 1)
+        while(left > 1)
         {
             cout<<"enter input\n";
              while(true)
@@ -51,6 +51,7 @@ int main()
             left = left - user;
             cout<<" remaning sticks "<<left<<"\n";
             //comp will play
+            if(left <= 1) break;
             if(left % 5 == 0) computer = 4;
             else if (left % 5 == 2) computer = 1;
             else if (left % 5 == 3) computer = 2;
@@ -61,17 +62,20 @@ int main()
     }
     else
     {
-        while(left > 1)
+        
+
+        while (left > 1)
         {
-            //comp will play
+                        //comp will play
             if(left % 5 == 0) computer = 4;
             else if (left % 5 == 2) computer = 1;
             else if (left % 5 == 3) computer = 2;
             else if (left % 5 == 4) computer = 3;
             left = left - computer;
-            cout<<"\ncomputer picks "<<computer<<" stikcs \nremaning sticks "<<left<<"\n";
+            cout<<"computer picks "<<computer<<" stikcs\nremaning sticks "<<left<<"\n";
+            if(left <= 1) break;
             cout<<"enter input\n";
-            while(true)
+             while(true)
             {
                 cin>>user;
                 if(user == 1 || user == 2 || user == 3 || user == 4)
@@ -81,15 +85,24 @@ int main()
                  
 
             }
+            
             left = left - user;
-            cout<<" remaning sticks"<<left;
+            cout<<" remaning sticks "<<left<<"\n";
+
         }
 
     }
     if(left == 1) 
     cout<<"\ncomputer wins";
-    cout<<"\npress  1 for play again \n0 fro exit";
-    cin>>play;
+    cout<<"\npress  y for play again \nn fro exit";
+    while(true)
+    {
+        cin>>play;
+        if(play == 'Y' ||play == 'y') break;
+        else if(play == 'N'||play == 'n') break;
+        else 
+        cout<<"please answer in yes or no";
+    }
      
     }
     return 0;
