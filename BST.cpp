@@ -24,6 +24,7 @@ bool search(int data);
 int maximum_number();
 int minimum_number();
 bool IsBST();
+void delete_node(int value);
 BstNode* GetNewNode(int data);
 
 BstNode* GetNewNode(int data)
@@ -284,6 +285,40 @@ bool IsBST()
 
 }
 
+void delete_node(int data)
+{
+    //1.go till the value in the tree
+    BstNode *tempRoot = Root;
+    BstNode *previous_node = NULL;
+    while(tempRoot->data != data)
+    {
+        previous_node = tempRoot;
+        if(data<=tempRoot->data) tempRoot = tempRoot->left;
+        else tempRoot = tempRoot-> right;
+    }
+
+    cout<<"\nnode to be deleted "<<tempRoot->data;
+    //2.check the which case fits with the node  i.e node has one two or null child
+     // case 1
+    if (tempRoot->left == NULL && tempRoot->right == NULL) // case 1
+    {
+        if(previous_node->left == tempRoot) previous_node->left = NULL;
+        else previous_node->right = NULL;
+    }
+    //case 2
+    else if (tempRoot->right == NULL || tempRoot->left == NULL)
+    {
+
+    }
+    //case 3 
+    else
+    {
+        
+
+    }
+    //3.set the link accordingly and free the memory allocated for the node
+}
+
 int main()
 {
     //call functions here
@@ -307,6 +342,8 @@ int main()
     cout<<"\nfor bool function \n";
     if(IsBST()== true) cout<<"\nthe tree is binary tree";
     DFS_traversal_postorder_multipleStack();
+    delete_node(18);
+    DFS_traversal_inorder();
 
     return 0;
 }
