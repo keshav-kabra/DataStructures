@@ -4,6 +4,7 @@
 #include<iostream>
 #include<queue>
 #include<stack>
+#include<cstring>
 using namespace std;
 
 struct BstNode
@@ -281,21 +282,32 @@ bool IsBST()
         else false;
     }
     //3.if arr is sorted then it is a binary tree  else not 
+    return true;
     
 
 }
 
 void delete_node(int data)
 {
+    string relation = ""; 
     //1.go till the value in the tree
     BstNode *tempRoot = Root;
     BstNode *previous_node = NULL;
     while(tempRoot->data != data)
     {
         previous_node = tempRoot;
-        if(data<=tempRoot->data) tempRoot = tempRoot->left;
-        else tempRoot = tempRoot-> right;
+        if(data<=tempRoot->data) 
+        {
+            tempRoot = tempRoot->left;
+            relation = "left";
+        }
+        else 
+        {
+            tempRoot = tempRoot-> right;
+            relation = "right";
+        }
     }
+    cout<<"\nprevious_node "<<previous_node->data;
 
     cout<<"\nnode to be deleted "<<tempRoot->data;
     //2.check the which case fits with the node  i.e node has one two or null child
@@ -305,9 +317,20 @@ void delete_node(int data)
         if(previous_node->left == tempRoot) previous_node->left = NULL;
         else previous_node->right = NULL;
     }
-    //case 2
+    //case 2 if only one child
     else if (tempRoot->right == NULL || tempRoot->left == NULL)
     {
+        if(tempRoot->right == NULL) 
+        {
+            if(relation == "left") previous_node->left = tempRoot->left;
+            else previous_node->right = tempRoot->left;
+        }
+        else
+        {
+            if(relation == "left") previous_node->left = tempRoot->right;
+            else previous_node->right = tempRoot->right;
+        }
+
 
     }
     //case 3 
@@ -329,6 +352,10 @@ int main()
     insert(20);
     insert(500);
     insert(18);
+    insert(5);
+    insert(11);
+    insert(17);
+
     if(search(20) == true) cout<<"value found\n";
     else cout<<"value not found\n";
     int maximum_value = maximum_number();
@@ -342,7 +369,8 @@ int main()
     cout<<"\nfor bool function \n";
     if(IsBST()== true) cout<<"\nthe tree is binary tree";
     DFS_traversal_postorder_multipleStack();
-    delete_node(18);
+    delete_node(7);
+    delete_node(11);
     DFS_traversal_inorder();
 
     return 0;
