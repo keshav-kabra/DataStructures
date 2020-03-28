@@ -336,10 +336,33 @@ void delete_node(int data)
     //case 3 
     else
     {
+        BstNode* replacing_node = tempRoot->left;
+        previous_node = tempRoot;
+        
+        
+        //find largest in left sub tree
+        while(replacing_node->right != NULL)
+        {
+            previous_node = replacing_node;
+            replacing_node = replacing_node ->right;
+        }
+        tempRoot->data = replacing_node->data;
+        //now we have to delete replacing node
+        if(replacing_node->left == NULL)
+        {
+            //apply case 1
+            if(previous_node->left == tempRoot) previous_node->left = NULL;
+            else previous_node->right = NULL;
+        }
+        else
+        {
+            //apply case 2
+            previous_node->left = replacing_node->left;
+
+        }
         
 
     }
-    //3.set the link accordingly and free the memory allocated for the node
 }
 
 int main()
@@ -369,8 +392,8 @@ int main()
     cout<<"\nfor bool function \n";
     if(IsBST()== true) cout<<"\nthe tree is binary tree";
     DFS_traversal_postorder_multipleStack();
-    delete_node(7);
-    delete_node(11);
+    delete_node(20);
+    
     DFS_traversal_inorder();
 
     return 0;
