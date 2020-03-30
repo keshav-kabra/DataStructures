@@ -1,1 +1,2 @@
-    // delete_node(7);
+ // cin>>first_number;
+    // cin>>second_number;

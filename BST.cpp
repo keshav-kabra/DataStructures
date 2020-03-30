@@ -392,7 +392,7 @@ int main()
     cout<<"\nfor bool function \n";
     if(IsBST()== true) cout<<"\nthe tree is binary tree";
     DFS_traversal_postorder_multipleStack();
-    delete_node(20);
+    delete_node(10);
     
     DFS_traversal_inorder();
 
