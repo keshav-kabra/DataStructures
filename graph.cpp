@@ -1,29 +1,72 @@
 #include<iostream>
+#include<queue>
+#include<vector>
 using namespace std;
 struct node{
     int data;
     node* next;
 };
+int nodes,neighbours,i ,j,data;
+void print_graph(node *vertex_list[])
 
-void read_graph()
 {
-    int nodes,neighbours,i,j, data;
-    cout<<"enter the number of nodes to enter\n";
-    cin>>nodes;
+    
+    int i= 0,front_node, k=0, flag =0 ;
+    // node* temp = vertex_list[k];
+    queue<int> visited;  
+    queue<int> queue;
+    bool visited_node[nodes];
+    for(i=0;i<nodes;i++) visited_node[i] == false;
+    queue.push(0);
+    visited_node[0] = true;
+    while(!queue.empty())
+    {
+        // node *temp = vertex_list[k++];
+        node* temp = vertex_list[queue.front()];
+        front_node = queue.front();queue.pop();
+        visited.push(front_node);
+        while(temp != NULL)
+        {
+            if(visited_node[temp->data] == false) 
+            {
+                visited.push(temp->data);
+                visited_node[temp->data] = true;
+                
+            }
+            
+            
+            temp = temp->next;
+        }
+        //dequeue the list and put vertice in visited list
+        
+
+            
+
+        //push all the vertices in queue 
+    }
+    while(!visited.empty())
+    {
+        cout<<visited.front()<<"\t";
+        visited.pop();
+    }
+
+
+}
+
+void read_graph(node* vertex_list[])
+{
 
     //create array of pointers to nodes
-    node* vertex_list[nodes];
-    for(i=0;i<nodes;i++) vertex_list[i] = NULL;
     //
     for(i=0;i<nodes;i++)
     {
-        cout<<"enter the no of neighbour of node"<<i+1<<"\n";
+        cout<<"enter the no of neighbour of node"<<i<<"\n";
         cin>>neighbours;
         node *lastnode = NULL;
         for(j=0;j<neighbours;j++)
         {
             //create new node
-            cout<<"enter the "<<j+1<<" neighbour of"<<i+1<<"node\n";
+            cout<<"enter the "<<j+1<<" neighbour of"<<i<<"node\n";
             cin>>data;
             node *temp = new node();
             temp->data = data;
@@ -41,32 +84,17 @@ void read_graph()
 }
 int main()
 {
-    read_graph();
+    
+    cout<<"enter the number of nodes to enter\n";
+    cin>>nodes;
+    node* vertex_list[nodes];
+    for(i=0;i<nodes;i++) vertex_list[i] = NULL;
+
+
+    
+    read_graph(vertex_list);
+    print_graph(vertex_list);
     cout<<"working";
     return 0;
 }
 
-
-
-/*
- //2. take the values of nodes of graph
-    for(i=0;i<nodes;i++)
-    {
-        cout<<"enter the value of"<<i+1<<"node\n";
-        cin>>value;
-        cout<<"commint 1";
-        //3.put value in the vertex array and put next value as NULL
-        vertex_list[i]->data = value;
-        cout<<"comming here";
-        vertex_list[i]->next = NULL;
-    }
-    //4. try to print what you have done
-    for(i=0;i<nodes;i++)
-    {
-        cout<<"value "<<vertex_list[i]->data<<"\t";
-        if(vertex_list[i]->next == NULL)
-        {
-            cout<<"yes next is NULL\n";
-        }
-    }
- */
