@@ -15,7 +15,7 @@ void print_graph(node *vertex_list[])
     // node* temp = vertex_list[k];
     queue<int> visited;  
     queue<int> queue;
-    bool visited_node[nodes];
+    bool visited_node[10];
     for(i=0;i<nodes;i++) visited_node[i] == false;
     queue.push(0);
     visited_node[0] = true;
@@ -29,7 +29,7 @@ void print_graph(node *vertex_list[])
         {
             if(visited_node[temp->data] == false) 
             {
-                visited.push(temp->data);
+                queue.push(temp->data);
                 visited_node[temp->data] = true;
                 
             }
@@ -44,6 +44,7 @@ void print_graph(node *vertex_list[])
 
         //push all the vertices in queue 
     }
+    cout<<"vertices :\t";
     while(!visited.empty())
     {
         cout<<visited.front()<<"\t";
@@ -93,6 +94,7 @@ int main()
 
     
     read_graph(vertex_list);
+    // for(i=0;i<nodes;i++) cout<<vertex_list[i]->data<<"\t";
     print_graph(vertex_list);
     cout<<"working";
     return 0;
