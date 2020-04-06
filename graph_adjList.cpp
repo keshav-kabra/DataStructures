@@ -1,13 +1,48 @@
 #include<iostream>
 #include<queue>
 #include<vector>
+#include<stack>
 using namespace std;
 struct node{
     int data;
     node* next;
 };
 int nodes,neighbours,i ,j,data;
-void print_graph(node *vertex_list[])
+void print_graph_dfs(node* vertex_list[] , int element)
+{
+    //1.initialize a stack
+    stack<int> vertex_stack;
+    bool visited_node[nodes];
+    for(i=0;i<nodes;i++) visited_node[i] = false;
+    //2. put any one vertice in the stack
+    vertex_stack.push(element);
+    visited_node[element] = true;
+    //3.while stack is not empty
+    cout<<"\nvertices:\t";
+    while(!vertex_stack.empty())
+    {  
+
+        //1.take out element form stack and push its neighbour to stack if not visisted
+        int poped_element = vertex_stack.top();
+        cout<<poped_element<<"\t";
+        vertex_stack.pop();
+        node* temp = vertex_list[poped_element];
+        //2.reaeat step 1 till all the neightbour of a vertice are visisted
+        while(temp != NULL)
+        {
+            //check if visited
+            if(visited_node[temp->data] == false)
+            {
+                vertex_stack.push(temp->data);
+                visited_node[temp->data] = true;
+                
+            }
+            temp = temp->next;
+        }
+        //3.print the vertices
+    }
+}
+void print_graph_bfs(node *vertex_list[])
 
 {
     
@@ -15,7 +50,7 @@ void print_graph(node *vertex_list[])
     // node* temp = vertex_list[k];
     queue<int> visited;  
     queue<int> queue;
-    bool visited_node[10];
+    bool visited_node[nodes];
     for(i=0;i<nodes;i++) visited_node[i] == false;
     queue.push(0);
     visited_node[0] = true;
@@ -95,7 +130,8 @@ int main()
     
     read_graph(vertex_list);
     // for(i=0;i<nodes;i++) cout<<vertex_list[i]->data<<"\t";
-    print_graph(vertex_list);
+    print_graph_bfs(vertex_list);
+    print_graph_dfs(vertex_list, 0);
     cout<<"working";
     return 0;
 }
