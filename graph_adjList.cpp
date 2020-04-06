@@ -39,7 +39,6 @@ void print_graph_dfs(node* vertex_list[] , int element)
             }
             temp = temp->next;
         }
-        //3.print the vertices
     }
 }
 void print_graph_bfs(node *vertex_list[])
@@ -89,7 +88,7 @@ void print_graph_bfs(node *vertex_list[])
 
 }
 
-void read_graph(node* vertex_list[])
+void read_graph(node *vertex_list[])  // or we can write it as (node **vertex_list)
 {
 
     //create array of pointers to nodes
@@ -125,9 +124,6 @@ int main()
     cin>>nodes;
     node* vertex_list[nodes];
     for(i=0;i<nodes;i++) vertex_list[i] = NULL;
-
-
-    
     read_graph(vertex_list);
     // for(i=0;i<nodes;i++) cout<<vertex_list[i]->data<<"\t";
     print_graph_bfs(vertex_list);
