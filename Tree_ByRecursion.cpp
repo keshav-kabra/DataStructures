@@ -2,7 +2,7 @@
 //1.implement tree by recursion i.e insert method
 //-- search an element in the tree
 //2.bfs traversa of tree
-//3.dfs traversal of tree
+//3.dfs ->  inorder , preorder , postorder traversal of tree
 #include<iostream>
 #include<queue>
 using namespace std;
@@ -16,7 +16,8 @@ struct TreeNode
 //declaration
 TreeNode* Insert(int Data  , TreeNode* TempNode);
 TreeNode* NewNode(int Data );
-void BFS_traversal(TreeNode* TempRoot);
+void BFS_Traversal(TreeNode* TempRoot);
+void DFS_Traversal_Preorder(TreeNode* TempRoot);
 bool serach(int Data , TreeNode* TempNode);
 // definition
 TreeNode* NewNode(int Data)
@@ -61,12 +62,35 @@ bool Search(int Data , TreeNode* TempRoot)
     else if(Data>TempRoot->Data)  ReturnedValue =  Search(Data , TempRoot->Right);
     return ReturnedValue;
 }
-void BFS_traversal(TreeNode* TempRoot)
+void BFS_Traversal(TreeNode* TempRoot)
 {
     //conventially not posiible 
     //will try to implement later
 
 }
+void DFS_Traversal_Preorder(TreeNode* TempRoot)
+{
+
+    if(TempRoot == NULL) return;
+    cout<<TempRoot->Data<<"\t";
+    DFS_Traversal_Preorder(TempRoot->Left);
+    DFS_Traversal_Preorder(TempRoot->Right);
+}
+void DFS_Traversal_Inorder(TreeNode* TempRoot)
+{
+    if(TempRoot == NULL) return;
+    DFS_Traversal_Inorder(TempRoot->Left);
+    cout<<TempRoot->Data<<"\t";
+    DFS_Traversal_Inorder(TempRoot->Right);
+
+}void DFS_Traversal_Postorder(TreeNode* TempRoot)
+{
+    if(TempRoot == NULL) return;
+    DFS_Traversal_Inorder(TempRoot->Left);
+    DFS_Traversal_Inorder(TempRoot->Right);
+    cout<<TempRoot->Data<<"\t";
+}
+
 
 int main()
 {
@@ -81,17 +105,14 @@ int main()
     Insert(7,Root);
     Insert(18,Root);
     Insert(500,Root);
-    // check if tree is correct
-    // TreeNode* TempRoot = Root;
-    // while(TempRoot!= NULL)
-    // {
-    //     cout<<TempRoot->Data<<"\t";
-    //     TempRoot = TempRoot->Right;
-    // } 
-   
-   //check the value is present in the tree
+    //check the value is present in the tree
    if(Search(500, Root) == true) cout<<"\nvalue is present in the tree";
    else cout<<"\ncant find value";  
-
+   cout<<"Preorder:/t" ;
+    DFS_Traversal_Preorder(Root);
+    cout<<"Inorder:\t";
+    DFS_Traversal_Inorder(Root);
+    cout<<"Postorder:\t";
+    DFS_Traversal_Postorder(Root);
     return 0;
 }
