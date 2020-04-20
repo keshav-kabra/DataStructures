@@ -17,7 +17,6 @@ string add(string num1 , string num2)
         sum = (num1[i]-'0')+(num2[i]-'0')+carry;
         carry = sum/10;
         answer.insert(0,to_string( (sum%10)));
-        cout<<"this value is added"<<sum%10<<"\n";
     }
     if(carry)  answer.insert(0 ,to_string(carry));
    
@@ -40,7 +39,6 @@ string multi(string x , string y )
     c = y.substr(0, ceil((y.size()/2)));
     d =  y.substr((y.size()/2), y.size() );
     //find no of zeros to add
-    cout<<a<<" "<<b<<" "<<c<<" "<<d<<" "<<"\n";
     string zeros = "1"; 
     
     int zero_int = stoi(zeros);
@@ -67,7 +65,6 @@ string multi(string x , string y )
 main()
 {
     
-    cout<<"working";
-    string answer = multi("12", "34");
+    string answer = multi("3141592653589793238462643383279502884197169399375105820974944592", "2718281828459045235360287471352662497757247093699959574966967627");
     cout<<answer;
 }
