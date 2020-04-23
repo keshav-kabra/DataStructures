@@ -1,9 +1,9 @@
 //finding inversions in an array with time complexity (nlogn) using merge sort technique
 #include<bits/stdc++.h>
 using namespace std;
-int merge(int a[] , int l[] , int r[],int size_l,int size_r)
+long long merge(long long a[] , long long l[] , long long r[],long long size_l,long long size_r)
 {
-    int i=0,j=0,k=0, count=0;
+    long long i=0,j=0,k=0, count=0;
     while(i <size_l&& j <size_r)
     {
         if(l[i]<r[j]) a[k++] = l[i++];
@@ -18,41 +18,42 @@ int merge(int a[] , int l[] , int r[],int size_l,int size_r)
 
     return count;
 }
-int mergesort(int a[] , int size)
+long long mergesort(long long a[] , long long size)
 {
     if(size <2) return 0;
     //declare two array
-    int *l = (int*)malloc((size/2)*sizeof(int));
-    int *r = (int*)malloc(((size) -(size/2))*sizeof(int));
+    long long *l = (long long*)malloc((size/2)*sizeof(long long));
+    long long *r = (long long*)malloc(((size) -(size/2))*sizeof(long long));
     // enter the array into l and r
-    for(int i=0;i<size/2;i++) l[i] = a[i];
-    for(int i= size/2;i<size; i++)  r[i-(size/2)] = a[i];
+    for(long long i=0;i<size/2;i++) l[i] = a[i];
+    for(long long i= size/2;i<size; i++)  r[i-(size/2)] = a[i];
     mergesort(l , size/2);
     mergesort(r , (size)-(size/2));
-    int count = merge(a , l , r , size/2 , size - (size/2));
+    long long count = merge(a , l , r , size/2 , size - (size/2));
     return count;
 }
-int inversion(int a[], int size)
+long long inversion(long long a[], long long size)
 {
     if(size<2) return 0;
     //divide array into two array
-    int *l = (int*)malloc((size/2)*sizeof(int));
-    int *r = (int*)malloc(((size) -(size/2))*sizeof(int));
-    for(int i=0;i<size/2;i++) l[i] = a[i];
-    for(int i= size/2;i<size; i++)  r[i-(size/2)] = a[i];
-    int x = inversion(l , size/2);
-    int y = inversion(r , size -(size/2));
-    int z = mergesort(a , size);
+    long long *l = (long long*)malloc((size/2)*sizeof(long long));
+    long long *r = (long long*)malloc(((size) -(size/2))*sizeof(long long));
+    for(long long i=0;i<size/2;i++) l[i] = a[i];
+    for(long long i= size/2;i<size; i++)  r[i-(size/2)] = a[i];
+    long long x = inversion(l , size/2);
+    long long y = inversion(r , size -(size/2));
+    long long z = mergesort(a , size);
     return x+y+z;
 
  
 }
 main()
 {
-    int a[6],size=0;
-    for(int i=0;i<6;i++) cin>>a[i];
-    int count = inversion(a , 6);
+    long long *a = (long long*)malloc(100000*sizeof(long long)),size=0;
+    for(long long i=0;i<100000;i++) cin>>a[i];
+    long long count = inversion(a , 100000);
     cout<<"inversions are  "<<count;
+    cout<<"\n";
     
 
 }
