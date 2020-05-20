@@ -1,7 +1,15 @@
-
-    while(i <size_l&& j <size_r)
+void bubbleup(int *a, int son )
+{
+    while(son!=0)
     {
-        if(l[i]<r[j]) a[k++] = l[i++];
-        else a[k++] = r[j++];
+        int dad = (son-1)/2;
+        // cout<<"\nson is "<<a[son]<<"and dad is "<<a[dad]; 
+        if(a[dad] > a[son]) 
+        {  
+            swap(&a[dad], &a[son]);
+            // cout<<"  value is swaped";
+        }
+        else return;
+        son = dad;
     }
-    while(i<size_l) a[k++] = l[i++];
+}

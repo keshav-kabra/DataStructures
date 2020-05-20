@@ -1,4 +1,5 @@
 //finding inversions in an array with time complexity (nlogn) using merge sort technique
+//modify array size according to need here i have taken a 100000 inout numbers
 #include<bits/stdc++.h>
 using namespace std;
 long long merge(long long a[] , long long l[] , long long r[],long long size_l,long long size_r)
